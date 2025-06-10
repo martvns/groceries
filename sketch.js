@@ -10,6 +10,7 @@ let gwiazdki = [];
 let koszykImg;
 let pickSound;
 let bgMusic;
+let pokazOkno = false;
 
 
 function preload() {
@@ -52,7 +53,7 @@ for (let i = 0; i < 50; i++) {
 }
   
 gracz = {
-    x: 100,
+    x: 380,
     y: 100,
     size: 80,
     speed: 4
@@ -73,7 +74,7 @@ function draw() {
     return;
   }
 
-  background(220);
+  
   image(tloImg, 0, 0, width, height);
   
 
@@ -123,8 +124,21 @@ function draw() {
   if (koszykImg) {
   image(koszykImg, 470, 450, 100, 80); 
   }
-}
+  
+    if (pokazOkno) {
+  fill(255);
+  stroke(hueValue, 80, 100);
+      hueValue = (hueValue + 1) % 360;
+  strokeWeight(4);
+  rect(width / 2 - 200, height / 2 - 100, 400, 200, 20);
 
+  noStroke();
+  fill(hueValue, 80, 100);
+      hueValue = (hueValue + 1) % 360;
+  textSize(26);
+  text("Zakupy zrobione!", width / 2, height / 2 );
+}
+}
 function rysujEkranStartowy() {
   
   // Tęczowe tło
@@ -145,14 +159,14 @@ function rysujEkranStartowy() {
 
   fill(0);
   textSize(32);
-  text("Wybierz swoją postać", width / 2, 100);
+  text("Wybierz swoją postać", width / 2, 250);
 
-  image(postac1Img, width / 2 - 150, 200, 100, 100);
-  image(postac2Img, width / 2 + 50, 200, 100, 100);
+  image(postac1Img, width / 2 - 150, height/2, 100, 100);
+  image(postac2Img, width / 2 + 50, height/2, 100, 100);
 
   textSize(20);
-  text("Naciśnij 1", width / 2 - 100, 320);
-  text("Naciśnij 2", width / 2 + 100, 320);
+  text("Naciśnij 1", width / 2 - 100, 450);
+  text("Naciśnij 2", width / 2 + 100, 450);
 }
 
 function keyPressed() {
@@ -194,4 +208,8 @@ koszyk.push({
       }
     }
   }
+  if (produkty.length === 0) {
+  pokazOkno = true;
 }
+}
+
